@@ -21,7 +21,7 @@ class GetBookUsecase(
 ) {
 
     fun get(isbn: String, salt: String): Book {
-        return bookDataSource.getBook(isbn, salt) ?: throw BookNotFoundException(isbn)
+        return bookDataSource.getBook(isbn, NonSerializeableSalt(salt)) ?: throw BookNotFoundException(isbn)
     }
 
 }
@@ -36,12 +36,16 @@ class SlowBookDataSource {
     )
 
     @Cacheable("book-cache", unless = "#result == null")
-    fun getBook(isbn: String, salt: String): Book? {
+    fun getBook(isbn: String, salt: NonSerializeableSalt): Book? {
         Thread.sleep(1000)
         return books[isbn]
     }
 
 }
+
+data class NonSerializeableSalt(
+    val salt: String
+)
 
 data class Book(
     val isbn: String,

@@ -34,13 +34,17 @@ class GetBookUsecaseIntegrationTest(
             measure { assertThrows<BookNotFoundException> { usecase.get("unknown", "s") } }
         }
 
-        // This will produce a Redis DB with the following values:
+        // This will produce a Redis DB with the following keys:
 
-        // book-cache::SimpleKey [978-0137081073,s3]
-        // book-cache::SimpleKey [978-0137081073,s2]
-        // book-cache::SimpleKey [978-0132350884,s2]
-        // book-cache::SimpleKey [978-0137081073,s1]
-        // book-cache::SimpleKey [978-0132350884,s1]
+        // book-cache::SimpleKey [978-0137081073,NonSerializeableSalt(salt=s3)]
+        // book-cache::SimpleKey [978-0137081073,NonSerializeableSalt(salt=s2)]
+        // book-cache::SimpleKey [978-0132350884,NonSerializeableSalt(salt=s1)]
+        // book-cache::SimpleKey [978-0137081073,NonSerializeableSalt(salt=s1)]
+        // book-cache::SimpleKey [978-0132350884,NonSerializeableSalt(salt=s2)]
+
+        // Keys are composed of the cache's name and the toString value of a SimpleKey instance,
+        // at least in case of multiple method parameters. If there is only one method parameter,
+        // that parameter's toString value is used (e.g. "book-cache::978-0137081073")
 
         println("Redis Port: " + System.getProperty("REDIS_PORT"))
         println("BREAK_POINT")
