@@ -7,8 +7,9 @@ This repositoriy contains examples for all kinds of technologies. It's basically
 ## Content:
 
 - JUnit 5
-- Spring (Boot / Cloud)
-  - Spring Data JDBC
+- Spring Boot
+  - spring-data-jdbc
+  - spring-data-redis
 
 
 [1]:https://circleci.com/gh/slu-it/technology-examples/tree/master
