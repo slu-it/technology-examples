@@ -1,6 +1,15 @@
 version: 2
 
 jobs:
+  ci-junit5:
+    working_directory: ~/work
+    docker:
+      - image: circleci/openjdk:11-jdk
+    steps:
+      - checkout
+      - run: cd junit5 && ./gradlew build
+      - store_test_results:
+          path: junit5/build/test-results
   ci-spring-data-jdbc:
     working_directory: ~/work
     docker:
@@ -15,4 +24,5 @@ workflows:
   version: 2
   ci-build:
     jobs:
+    - ci-junit5
     - ci-spring-data-jdbc

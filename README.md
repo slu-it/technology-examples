@@ -6,6 +6,7 @@ This repositoriy contains examples for all kinds of technologies. It's basically
 
 ## Content:
 
+- JUnit 5
 - Spring (Boot / Cloud)
   - Spring Data JDBC
 
