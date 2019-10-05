@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController
 import java.time.Clock
 import java.util.*
 import javax.servlet.http.HttpServletRequest
-import javax.validation.Valid
 
 @RestController
 @RequestMapping("/stronglytypedwithdsl/persons")
@@ -29,7 +28,7 @@ class StronglyTypedWithDslPersonController(
     private val database: MutableMap<UUID, Person> = mutableMapOf()
 
     @PostMapping
-    fun addPerson(@Valid @RequestBody person: Person): Person {
+    fun addPerson(@RequestBody person: Person): Person {
         val id = UUID.randomUUID()
         val persistedPerson = person.copy(id = id)
         database.put(id, persistedPerson)
