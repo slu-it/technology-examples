@@ -18,9 +18,16 @@ annotation class ZipCode(
 
     class Validator : ConstraintValidator<ZipCode, CharSequence?> {
         private val illegalCharacters = possibleInjectionCharacters
+        private val illegalCharactersMessage =
+            "contains one of these illegal characters: ${illegalCharacters.joinToString(separator = " ")}"
 
         override fun isValid(value: CharSequence?, context: ConstraintValidatorContext): Boolean {
-            return !(value containsAny illegalCharacters) // constraint #3
+            if (value containsAny illegalCharacters) { // constraint #3
+                context.disableDefaultConstraintViolation()
+                context.buildConstraintViolationWithTemplate(illegalCharactersMessage).addConstraintViolation()
+                return false
+            }
+            return true
         }
     }
 }
