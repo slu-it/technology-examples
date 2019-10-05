@@ -1,0 +1,3 @@
+package example.stronglytyped.validation
+
+val possibleInjectionCharacters = setOf('$', '<', '>', '"', ';', '\'') // not complete ...

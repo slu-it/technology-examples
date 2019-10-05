@@ -1,0 +1,3 @@
+package example.stronglytypedwithdsl.validation
+
+val possibleInjectionCharacters = setOf('$', '<', '>', '"', ';', '\'') // not complete ...
