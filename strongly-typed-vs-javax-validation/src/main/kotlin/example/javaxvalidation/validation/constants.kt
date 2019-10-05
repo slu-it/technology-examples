@@ -1,0 +1,3 @@
+package example.javaxvalidation.validation
+
+val possibleInjectionCharacters = setOf('$', '<', '>', '"', ';', '\'') // not complete ...
