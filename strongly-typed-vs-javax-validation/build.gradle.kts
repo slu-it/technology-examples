@@ -20,7 +20,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("io.mockk:mockk:1.9.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine")
 }
 
 tasks.withType<Test> {
