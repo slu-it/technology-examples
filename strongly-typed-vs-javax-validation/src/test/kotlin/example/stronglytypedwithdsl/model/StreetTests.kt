@@ -1,5 +1,6 @@
 package example.stronglytypedwithdsl.model
 
+import example.createStringOfLength
 import example.stronglytypedwithdsl.model.contracts.DoesNotContainAnyStringTypeContract
 import example.stronglytypedwithdsl.model.contracts.HasMaxLengthOfStringTypeContract
 import example.stronglytypedwithdsl.model.contracts.IsNotBlankStringTypeContract
