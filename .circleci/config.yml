@@ -27,6 +27,15 @@ jobs:
       - run: cd spring-data-redis && ./gradlew build
       - store_test_results:
           path: spring-data-redis/build/test-results
+  ci-strongly-typed-vs-javax-validation:
+    working_directory: ~/work
+    docker:
+      - image: circleci/openjdk:8-jdk
+    steps:
+      - checkout
+      - run: cd strongly-typed-vs-javax-validation && ./gradlew build
+      - store_test_results:
+          path: strongly-typed-vs-javax-validation/build/test-results
 
 workflows:
   version: 2
@@ -35,3 +44,4 @@ workflows:
     - ci-junit5
     - ci-spring-data-jdbc
     - ci-spring-data-redis
+    - ci-strongly-typed-vs-javax-validation
