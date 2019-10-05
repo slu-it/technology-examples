@@ -1,6 +1,9 @@
-package example.javaxvalidation.validation
+package example.stronglytyped.model
 
 import example.createStringOfLength
+import example.stronglytyped.validation.possibleInjectionCharacters
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.Test
@@ -8,7 +11,7 @@ import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-internal class StreetTests : ValidationTest() {
+internal class StreetTests {
 
     val maxLength = 100
     val illegalCharacters = possibleInjectionCharacters
@@ -16,39 +19,43 @@ internal class StreetTests : ValidationTest() {
     @ParameterizedTest
     @ValueSource(strings = ["Musterstraße 132 A"])
     fun `valid examples`(value: String) {
-        assertValid(instance(value))
+        instance(value)
     }
 
     @ParameterizedTest
     @ValueSource(strings = [" ", "  ", "\t", "\t\t", "\n", "\n\n"])
     fun `blank value is invalid`(value: String) {
-        assertProblems(instance(value))
-            .containsOnly("must not be blank")
+        assertThatThrownBy { instance(value) }
+            .hasMessageContaining("must not be blank")
     }
 
     @Test
     fun `value of max length is valid`() {
-        assertValid(instance(createStringOfLength(maxLength)))
+        instance(createStringOfLength(maxLength))
     }
 
     @Test
     fun `value of more than max length is invalid`() {
-        assertProblems(instance(createStringOfLength(maxLength + 1)))
-            .containsOnly("size must be between 0 and $maxLength")
+        assertThatThrownBy { instance(createStringOfLength(maxLength + 1)) }
+            .hasMessageContaining("must not exceed $maxLength characters")
     }
 
     @TestFactory
     fun `values containing any illegal characters are invalid`(): List<DynamicTest> =
         illegalCharacters.map { illegalCharacter ->
             dynamicTest("$illegalCharacter") {
-                assertProblems(instance("Musterstraße 132 ${illegalCharacter}"))
-                    .containsOnly("contains one of these illegal characters: $ < > \" ; '")
+                assertThatThrownBy { instance("Musterstraße 132 ${illegalCharacter}") }
+                    .hasMessageContaining("must not contain any illegal characters")
             }
         }
 
-    private fun instance(value: String) = TestClass(value)
+    @Test
+    fun `toString returns original value`() {
+        val value = "Musterstraße 132 A"
+        val instance = instance(value)
+        assertThat(instance.toString()).isEqualTo(value)
+    }
 
-    data class TestClass(@field:Street val value: String)
+    private fun instance(value: String) = Street(value)
 
 }
-
