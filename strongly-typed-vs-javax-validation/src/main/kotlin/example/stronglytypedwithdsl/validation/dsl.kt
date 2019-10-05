@@ -27,6 +27,9 @@ class Validation<T>(
 
 }
 
+class ValidationException(label: String, val problems: List<String>) :
+    RuntimeException("Value of $label is invalid: ${problems.joinToString(separator = "; ")}")
+
 fun Validation<Int>.isGreaterThanOrEqualTo(minValue: Int) {
     if (this.value < minValue) {
         addProblem("$label [$value] must be greater than or equal to $minValue!")
