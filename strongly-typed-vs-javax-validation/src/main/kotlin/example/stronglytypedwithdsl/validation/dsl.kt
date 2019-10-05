@@ -53,6 +53,7 @@ fun Validation<String>.hasMaxLengthOf(maxLength: Int) {
 
 fun Validation<String>.doesNotContainAny(characters: Iterable<Char>) {
     if (this.value.any { char -> characters.contains(char) }) {
-        addProblem("$label [$value] contains at least one of the following illegal characters: $characters")
+        val chars = characters.joinToString(separator = " ")
+        addProblem("$label [$value] contains at least one of the following illegal characters: $chars")
     }
 }
