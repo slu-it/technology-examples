@@ -72,7 +72,7 @@ internal class StronglyTypedWithDslPersonControllerTests(
               "error": "Bad Request",
               "message": "Payload validation failed!",
               "details": [
-                "First Name must not be blank!"
+                "'First Name' [] - must not be blank!"
               ]
             }
             """
