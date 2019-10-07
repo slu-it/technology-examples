@@ -1,0 +1,3 @@
+package example.validation
+
+val possibleInjectionCharacters = setOf('$', '<', '>', '"', ';', '\'') // not complete ...

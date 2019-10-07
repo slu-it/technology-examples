@@ -1,6 +1,15 @@
 version: 2
 
 jobs:
+  ci-jqwik:
+    working_directory: ~/work
+    docker:
+      - image: circleci/openjdk:11-jdk
+    steps:
+      - checkout
+      - run: cd jqwik && ./gradlew build
+      - store_test_results:
+          path: jqwik/build/test-results
   ci-junit5:
     working_directory: ~/work
     docker:
@@ -41,6 +50,7 @@ workflows:
   version: 2
   ci-build:
     jobs:
+    - ci-jqwik
     - ci-junit5
     - ci-spring-data-jdbc
     - ci-spring-data-redis
