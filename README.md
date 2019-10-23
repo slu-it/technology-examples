@@ -6,10 +6,12 @@ This repositoriy contains examples for all kinds of technologies. It's basically
 
 ## Content:
 
+- jqwik
 - JUnit 5
 - Spring Boot
   - spring-data-jdbc
   - spring-data-redis
+- Strongly Typed vs. JavaX Validation
 
 
 [1]:https://circleci.com/gh/slu-it/technology-examples/tree/master
