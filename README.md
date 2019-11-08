@@ -2,7 +2,7 @@
 
 # Technology Examples
 
-This repositoriy contains examples for all kinds of technologies. It's basically my personal sandbox.
+This repository contains examples for all kinds of technologies. It's basically my personal sandbox.
 
 ## Content:
 
@@ -11,6 +11,7 @@ This repositoriy contains examples for all kinds of technologies. It's basically
 - Spring Boot
   - spring-data-jdbc
   - spring-data-redis
+  - spring-security
 - Strongly Typed vs. JavaX Validation
 
 
